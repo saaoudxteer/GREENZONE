@@ -1,0 +1,102 @@
+/* Styles généraux */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Header styles */
+.navbar {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #ff5a5f !important;
+}
+
+/* Cards pour les logements */
+.accommodation-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accommodation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Formulaires */
+.form-control:focus {
+    border-color: #ff5a5f;
+    box-shadow: 0 0 0 0.2rem rgba(255, 90, 95, 0.25);
+}
+
+.btn-primary {
+    background-color: #ff5a5f;
+    border-color: #ff5a5f;
+}
+
+.btn-primary:hover {
+    background-color: #ff4146;
+    border-color: #ff4146;
+}
+
+/* Footer */
+footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    background-color: #f8f9fa;
+    border-top: 1px solid #eee;
+}
+
+/* Carousel */
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+/* Détail logement */
+.accommodation-detail {
+    margin-top: 20px;
+}
+
+/* Badges de statut */
+.badge-confirmed {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-pending {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-cancelled {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Search box */
+.search-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 250px;
+    }
+}

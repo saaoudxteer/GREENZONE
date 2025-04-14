@@ -1,0 +1,46 @@
+<!-- bookings/templates/bookings/dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Mes réservations{% endblock %}
+
+{% block content %}
+    <h1>Mes réservations</h1>
+
+    <div class="row">
+        {% for booking in bookings %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header {% if booking.status == 'confirmed' %}bg-success text-white{% elif booking.status == 'cancelled' %}bg-danger text-white{% else %}bg-warning{% endif %}">
+                        Réservation #{{ booking.id }} - {{ booking.get_status_display }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ booking.accommodation.title }}</h5>
+                        <p>{{ booking.accommodation.address }}, {{ booking.accommodation.city }}</p>
+
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Arrivée:</strong> {{ booking.check_in_date }}</p>
+                                <p><strong>Départ:</strong> {{ booking.check_out_date }}</p>
+                                <p><strong>Voyageurs:</strong> {{ booking.guests }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Total:</strong> {{ booking.total_price }} €</p>
+                                <p><strong>Réservé le:</strong> {{ booking.created_at|date:"d/m/Y" }}</p>
+                            </div>
+                        </div>
+
+                        <a href="{% url 'accommodation_detail' booking.accommodation.id %}" class="btn btn-primary">Voir le logement</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info">
+                    Vous n'avez pas encore effectué de réservation.
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

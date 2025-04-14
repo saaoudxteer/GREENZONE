@@ -1,0 +1,37 @@
+<!-- bookings/templates/bookings/confirm.html -->
+{% extends 'base.html' %}
+
+{% block title %}Confirmer votre réservation{% endblock %}
+
+{% block content %}
+    <h1>Confirmer votre réservation</h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">{{ booking.accommodation.title }}</h5>
+            <p>{{ booking.accommodation.address }}, {{ booking.accommodation.city }}</p>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Date d'arrivée:</strong> {{ booking.check_in_date }}</p>
+                    <p><strong>Date de départ:</strong> {{ booking.check_out_date }}</p>
+                    <p><strong>Nombre de voyageurs:</strong> {{ booking.guests }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Prix par nuit:</strong> {{ booking.accommodation.price_per_night }} €</p>
+                    <p><strong>Total:</strong> {{ booking.total_price }} €</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form method="post" action="{% url 'booking_confirm' booking.id %}">
+        {% csrf_token %}
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'accommodation_detail' booking.accommodation.id %}" class="btn btn-secondary">Retour</a>
+            <button type="submit" class="btn btn-success">Confirmer la réservation</button>
+        </div>
+    </form>
+{% endblock %}

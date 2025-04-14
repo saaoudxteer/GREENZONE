@@ -1,0 +1,50 @@
+<!-- bookings/templates/bookings/create.html -->
+{% extends 'base.html' %}
+
+{% block title %}Réserver {{ accommodation.title }}{% endblock %}
+
+{% block content %}
+    <h1>Réserver {{ accommodation.title }}</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Détails du logement</h5>
+                    <p>{{ accommodation.address }}, {{ accommodation.city }}</p>
+                    <p>Prix: {{ accommodation.price_per_night }} € par nuit</p>
+                    <p>Capacité: {{ accommodation.capacity }} personne(s)</p>
+                </div>
+            </div>
+
+            <form method="post" action="{% url 'booking_create' accommodation.id %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="check_in" class="form-label">Date d'arrivée</label>
+                    <input type="date" class="form-control" id="check_in" name="check_in" value="{{ request.GET.check_in }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="check_out" class="form-label">Date de départ</label>
+                    <input type="date" class="form-control" id="check_out" name="check_out" value="{{ request.GET.check_out }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="guests" class="form-label">Nombre de voyageurs</label>
+                    <select class="form-control" id="guests" name="guests">
+                        {% for i in "x"|rjust:accommodation.capacity %}
+                            <option value="{{ forloop.counter }}" {% if request.GET.guests == forloop.counter|stringformat:"i" %}selected{% endif %}>{{ forloop.counter }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Continuer</button>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            {% if accommodation.images.all %}
+                <img src="{{ accommodation.images.first.image.url }}" class="img-fluid rounded" alt="{{ accommodation.title }}">
+            {% else %}
+                <div class="bg-secondary text-white text-center p-5 rounded">No Image</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

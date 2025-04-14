@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+    <h1>Bienvenue sur GreenZone</h1>
+    <p>Trouvez le logement idéal pour vos vacances !</p>
+    
+    <div class="search-box">
+        <h5>Rechercher un logement</h5>
+        <form method="get" action="{% url 'accommodation_search' %}" class="row g-3">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="city" placeholder="Ville">
+            </div>
+            <div class="col-md-3">
+                <input type="date" class="form-control" name="check_in" placeholder="Arrivée">
+            </div>
+            <div class="col-md-3">
+                <input type="date" class="form-control" name="check_out" placeholder="Départ">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Rechercher</button>
+            </div>
+        </form>
+    </div>
+
+    <h2 class="mb-4">Logements disponibles</h2>
+    
+    <div class="row">
+        {% for accommodation in accommodations %}
+            <div class="col-md-4 mb-4">
+                <div class="card accommodation-card h-100">
+                   {% if accommodation.image %}
+    <img src="{{ accommodation.image.url }}" class="card-img-top" alt="{{ accommodation.title }}">
+{% else %}
+
+    <div class="bg-secondary text-white text-center p-5">Pas d'image</div>
+{% endif %}
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ accommodation.title }}</h5>
+                        <p class="card-text">{{ accommodation.city }}</p>
+                        <p class="card-text">{{ accommodation.price_per_night }} € / nuit</p>
+                        <a href="{% url 'accommodation_detail' accommodation.id %}" class="btn btn-primary">Voir détails</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info">
+                    Aucun logement disponible pour le moment. Revenez bientôt !
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

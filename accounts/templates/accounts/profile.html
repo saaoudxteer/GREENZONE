@@ -1,0 +1,33 @@
+<!-- accounts/templates/accounts/profile.html -->
+{% extends 'base.html' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">Mes informations</h4>
+                </div>
+                <div class="card-body">
+                    <p><strong>Nom d'utilisateur :</strong> {{ user.username }}</p>
+                    <p><strong>Email :</strong> {{ user.email }}</p>
+                    <p><strong>Date d'inscription :</strong> {{ user.date_joined|date:"d/m/Y" }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Actions</h4>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'booking_dashboard' %}" class="btn btn-primary mb-2 w-100">Mes réservations</a>
+                    <a href="{% url 'accommodation_list' %}" class="btn btn-outline-primary w-100">Rechercher des logements</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

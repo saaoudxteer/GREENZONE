@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ accommodation.title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>{{ accommodation.title }}</h2>
+        <p class="text-muted">{{ accommodation.address }}, {{ accommodation.city }}</p>
+
+        {% if accommodation.image %}
+    <img src="{{ accommodation.image.url }}" class="img-fluid rounded mb-3" alt="{{ accommodation.title }}">
+{% else %}
+    <div class="bg-light text-center p-5 rounded mb-3">Aucune image disponible</div>
+{% endif %}
+
+
+        <p>{{ accommodation.description }}</p>
+
+        <ul class="list-unstyled">
+            <li><strong>Capacité :</strong> {{ accommodation.capacity }} personne(s)</li>
+            <li><strong>Prix :</strong> {{ accommodation.price_per_night }} € / nuit</li>
+        </ul>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                    <form method="get" action="{% url 'booking_create' accommodation.id %}">
+                        <div class="mb-2">
+                            <label class="form-label">Arrivée</label>
+                            <input type="date" name="check_in" class="form-control" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Départ</label>
+                            <input type="date" name="check_out" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Voyageurs</label>
+                            <select name="guests" class="form-select">
+                                {% for i in "x"|rjust:accommodation.capacity %}
+                                    <option value="{{ forloop.counter }}">{{ forloop.counter }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Réserver</button>
+                    </form>
+                {% else %}
+                    <div class="alert alert-info text-center">
+                        <a href="{% url 'login' %}">Connectez-vous</a> pour réserver.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
