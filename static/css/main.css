@@ -1,102 +1,279 @@
-/* Styles généraux */
+/* main.css - Custom styles for GreenZone, overriding Bootstrap */
+
+/* --- Font Imports (Ensure these are linked in your HTML or here) --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap');
+
+/* --- Variables CSS pour Palette Artistique & Nature --- */
+:root {
+    --color-primary: #2c5e4a; /* Deep Forest Green */
+    --color-secondary: #a0d2db; /* Soft Sky Blue */
+    --color-accent: #e57c58; /* Warm Terracotta Accent */
+    --color-background-light: #f8f6f2; /* Very Light Beige/Off-white */
+    --color-background-medium: #e8e4dc; /* Slightly Darker Beige */
+    --color-text-dark: #312e2a; /* Dark Brown/Near Black */
+    --color-text-light: #f8f6f2; /* For dark backgrounds */
+    --color-text-link-light: rgba(248, 246, 242, 0.85); /* Slightly transparent light for navbar links */
+    --color-text-link-light-hover: #ffffff; /* Full white on hover */
+
+    --font-primary: 'Montserrat', sans-serif;
+    --font-headings: 'Playfair Display', serif;
+
+    --transition-speed: 0.3s; /* Slightly faster for UI elements */
+    --transition-timing: ease-in-out;
+}
+
+/* --- Réinitialisation et Base --- */
+/* Bootstrap handles basic resets, but we set base styles */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
+    font-family: var(--font-primary);
+    background-color: var(--color-background-light);
+    color: var(--color-text-dark);
+    line-height: 1.7;
+    display: flex; /* For sticky footer */
+    flex-direction: column; /* For sticky footer */
+    min-height: 100vh; /* For sticky footer */
 }
 
-/* Header styles */
+/* --- General Typography Overrides --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-headings);
+    color: var(--color-primary); /* Default heading color */
+    margin-bottom: 1rem; /* Consistent spacing */
+}
+
+p {
+    margin-bottom: 1.2rem; /* Slightly more spacing */
+    opacity: 0.9;
+}
+
+a {
+    color: var(--color-accent); /* Default link color */
+    text-decoration: none;
+    transition: color var(--transition-speed) var(--transition-timing);
+}
+
+a:hover {
+    color: var(--color-primary); /* Darker green on hover */
+    text-decoration: underline;
+}
+
+/* --- Main Content Area --- */
+/* Style the container holding the main content block */
+.content-wrapper { /* Add this class to the div wrapping {% block content %} if needed, or style 'main' if you use a main tag */
+    flex-grow: 1; /* For sticky footer */
+    padding-top: 2rem; /* Space below navbar */
+    padding-bottom: 3rem; /* Space above footer */
+    position: relative;
+    overflow: hidden; /* To contain decorative elements */
+}
+
+/* Add decorative pseudo-elements to the content wrapper or main */
+.content-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 5%; left: -80px; /* Adjust positioning */
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(160, 210, 219, 0.15) 0%, rgba(160, 210, 219, 0) 70%);
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: -1; /* Behind content */
+    transform: rotate(15deg);
+    pointer-events: none;
+}
+
+.content-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 5%; right: -100px; /* Adjust positioning */
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(44, 94, 74, 0.08) 0%, rgba(44, 94, 74, 0) 65%);
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    opacity: 0.7;
+    z-index: -1; /* Behind content */
+    transform: rotate(-25deg);
+    pointer-events: none;
+}
+
+
+/* --- Navbar Styling --- */
+/* Override Bootstrap's bg-light and navbar-light */
 .navbar {
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: var(--color-primary) !important; /* Force override */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color var(--transition-speed) var(--transition-timing);
 }
 
+/* Brand Styling */
 .navbar-brand {
-    font-weight: bold;
-    color: #ff5a5f !important;
+    font-family: var(--font-headings);
+    color: var(--color-text-light) !important; /* Force override */
+    font-size: 1.8rem;
+    font-weight: 700;
+    transition: color var(--transition-speed) var(--transition-timing);
+}
+.navbar-brand:hover {
+    color: var(--color-secondary) !important; /* Soft blue on hover */
 }
 
-/* Cards pour les logements */
-.accommodation-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    overflow: hidden;
+/* Nav Link Styling */
+.navbar .nav-link {
+    color: var(--color-text-link-light) !important; /* Force override */
+    font-family: var(--font-primary);
+    font-weight: 600; /* Slightly bolder */
+    font-size: 1rem;
+    padding: 0.5rem 1rem; /* Adjust padding */
+    margin: 0 0.25rem; /* Spacing between links */
+    border-radius: 4px; /* Subtle rounding */
+    transition: color var(--transition-speed) var(--transition-timing), background-color var(--transition-speed) var(--transition-timing);
 }
 
-.accommodation-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: var(--color-text-light-hover) !important;
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle background on hover */
 }
 
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
+/* Active Nav Link */
+.navbar .nav-link.active { /* If you use JS to set active class */
+    color: var(--color-text-light-hover) !important;
+    font-weight: 700;
+    /* Optional: Add subtle underline */
+    /* border-bottom: 2px solid var(--color-secondary); */
 }
 
-/* Formulaires */
-.form-control:focus {
-    border-color: #ff5a5f;
-    box-shadow: 0 0 0 0.2rem rgba(255, 90, 95, 0.25);
+/* Navbar Toggler Icon (for mobile) */
+.navbar-toggler {
+    border-color: rgba(248, 246, 242, 0.5) !important; /* Light border */
 }
 
-.btn-primary {
-    background-color: #ff5a5f;
-    border-color: #ff5a5f;
+.navbar-toggler-icon {
+    /* Use a white SVG icon */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28248, 246, 242, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
-.btn-primary:hover {
-    background-color: #ff4146;
-    border-color: #ff4146;
+/* Ensure dropdowns match (if you use them) */
+.navbar .dropdown-menu {
+    background-color: var(--color-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.navbar .dropdown-item {
+    color: var(--color-text-link-light);
+}
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+    color: var(--color-text-light-hover);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Footer */
+
+/* --- Footer Styling --- */
+/* Override Bootstrap's bg-light */
 footer {
-    margin-top: 50px;
-    padding: 20px 0;
-    background-color: #f8f9fa;
-    border-top: 1px solid #eee;
+    background-color: var(--color-background-medium) !important; /* Force override */
+    color: var(--color-text-dark);
+    border-top: 4px solid var(--color-primary); /* Thicker green border */
+    padding: 2rem 0; /* Adjust padding */
+    margin-top: auto; /* For sticky footer */
+    text-align: center;
+    opacity: 0.9;
+    font-size: 0.9rem;
 }
 
-/* Carousel */
-.carousel-item img {
-    height: 400px;
-    object-fit: cover;
+footer p {
+    margin-bottom: 0; /* Reset margin for footer p */
 }
 
-/* Détail logement */
-.accommodation-detail {
-    margin-top: 20px;
+/* --- Custom Button Style (Optional) --- */
+/* Define a class you can use instead of or alongside Bootstrap's btn */
+.btn-custom {
+    display: inline-block;
+    padding: 12px 30px; /* Adjust padding */
+    background: linear-gradient(135deg, var(--color-accent), #f58a6b);
+    color: var(--color-text-light) !important; /* Important to override potential link styles */
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all var(--transition-speed) var(--transition-timing);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(229, 124, 88, 0.3);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
 }
 
-/* Badges de statut */
-.badge-confirmed {
-    background-color: #28a745;
-    color: white;
+.btn-custom:hover,
+.btn-custom:focus {
+    background: linear-gradient(135deg, #e06c48, #f07a5b);
+    box-shadow: 0 6px 18px rgba(229, 124, 88, 0.4);
+    transform: translateY(-2px);
+    color: var(--color-text-light) !important;
+    text-decoration: none;
+    outline: none;
 }
 
-.badge-pending {
-    background-color: #ffc107;
-    color: #212529;
+.btn-custom:active {
+    transform: translateY(0px);
+    box-shadow: 0 3px 10px rgba(229, 124, 88, 0.3);
 }
 
-.badge-cancelled {
-    background-color: #dc3545;
-    color: white;
+/* Style standard Bootstrap buttons if needed */
+/*
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+.btn-primary:hover {
+    background-color: darken(var(--color-primary), 10%);
+    border-color: darken(var(--color-primary), 10%);
+}
+*/
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991.98px) { /* Bootstrap lg breakpoint */
+    .navbar .navbar-collapse {
+        background-color: var(--color-primary); /* Background for collapsed menu */
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: 0.5rem;
+        padding: 1rem;
+        border-radius: 0 0 5px 5px;
+    }
+     .navbar .nav-link {
+         margin: 0.5rem 0;
+         display: block; /* Ensure links take full width */
+         text-align: center;
+    }
 }
 
-/* Search box */
-.search-box {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-    .carousel-item img {
-        height: 250px;
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+
+    .content-wrapper::before,
+    .content-wrapper::after {
+        width: 200px; height: 200px; /* Smaller decorative elements */
+        opacity: 0.4;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+
+    .content-wrapper::before,
+    .content-wrapper::after {
+        display: none; /* Hide decorative elements on small screens */
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
     }
 }

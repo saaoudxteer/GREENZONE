@@ -39,12 +39,6 @@
             </form>
         </div>
 
-        <div class="col-md-6">
-            {% if accommodation.images.all %}
-                <img src="{{ accommodation.images.first.image.url }}" class="img-fluid rounded" alt="{{ accommodation.title }}">
-            {% else %}
-                <div class="bg-secondary text-white text-center p-5 rounded">No Image</div>
-            {% endif %}
-        </div>
+
     </div>
 {% endblock %}

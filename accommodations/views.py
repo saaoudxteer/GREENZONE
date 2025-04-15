@@ -45,3 +45,5 @@ def accommodation_search(request):
         'check_in': check_in,
         'check_out': check_out,
     })
+def home(request):
+    return render(request, 'accommodations/home.html')
