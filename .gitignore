@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # .gitignore
 __pycache__/
 *.pyc
@@ -8,3 +9,28 @@ __pycache__/
 *.DS_Store
 .env
 staticfiles/
+=======
+# Ne pas suivre les infos sensibles
+.env
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Environnement virtuel
+env/
+venv/
+
+# Static files (collectstatic)
+staticfiles/
+
+# Base de données locale (si SQLite)
+*.sqlite3
+
+# Fichiers de log
+*.log
+
+# Fichiers de config perso
+.idea/
+.vscode/
+>>>>>>> 0ab084a (Mise a jour pour le deploiement)
