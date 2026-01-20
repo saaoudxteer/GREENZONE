@@ -24,7 +24,9 @@ jobs:
 
       - name: Prepare env
         run: |
-          cp .env.example .env
+           echo "SECRET_KEY=ci-secret-key" >> .env
+           echo "DEBUG=True" >> .env
+           echo "ALLOWED_HOSTS=127.0.0.1,localhost" >> .env
 
       - name: Django system checks
         run: |
