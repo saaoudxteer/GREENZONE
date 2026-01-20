@@ -1,36 +1,26 @@
-<<<<<<< HEAD
-# .gitignore
+# Secrets
+.env
+.env.*
+
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.sqlite3
+*.py[cod]
 *.log
-*.DS_Store
-.env
-staticfiles/
-=======
-# Ne pas suivre les infos sensibles
-.env
 
-# Cache Python
-__pycache__/
-*.pyc
-
-# Environnement virtuel
+# Virtual env
+.venv/
 env/
 venv/
 
-# Static files (collectstatic)
-staticfiles/
-
-# Base de données locale (si SQLite)
+# Django
+db.sqlite3
 *.sqlite3
+staticfiles/
+media/
 
-# Fichiers de log
-*.log
-
-# Fichiers de config perso
+# IDE
 .idea/
 .vscode/
->>>>>>> 0ab084a (Mise a jour pour le deploiement)
+
+# OS
+.DS_Store
